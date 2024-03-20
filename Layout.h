@@ -9,8 +9,9 @@ class Layout
 {
 public:
 	Layout();
+	Room* getFirstRoom();
 
 private: 
-	vector<Room> _roomList = {};
+	vector<Room*> _roomList = {};
 };
 

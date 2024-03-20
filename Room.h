@@ -19,12 +19,16 @@ public:
     void setName(string newName);
     void setDesc(string newDesc);
 
+    Room* getLinkedRoom(int index);
+    void setLinkedRoom(int index, Room* r);
 
-    map<std::string, Room*> linkedRooms = {};
-
+    void Displayrooms();
 
 private:
     string _name;
     string _desc;
+    Room* _linkedRooms[4];
+
+    string _directionNames[4] = { "North", "West", "South", "East" };
 };
 

@@ -1,52 +1,55 @@
 #include "Layout.h"
+#include "CommonDefinitions.h"
 
 Layout::Layout() 
 {
-	Room porch = Room("Porch", "Description");
+	Room* porch = new Room("Porch", "Description");
+	Room* corr1 = new Room("Corridor1", "Description");
+	Room* dinn = new Room("Dinning Room", "Description");
+	Room* hall = new Room("Hall", "Description");
+	Room* study = new  Room("Study", "Description");
+	Room* corr2 = new Room("Corridor 2", "Description");
+	Room* draw = new Room("Drawing Room", "Description");
+	Room* pantry1 = new Room("Pantry 1", "Description");
+	Room* pantry2 = new Room("Pantry 2", "Description");
+	Room* kitpass = new Room("Kitchen Passage", "Description");
+	Room* couyar = new Room("Courtyard", "Description");
+	Room* kitchen = new Room("Kitchen", "Description");
 
-	Room corr1 = Room("Corridor 1", "Description");
-	corr1.linkedRooms["s"] = &porch;
-	porch.linkedRooms["n"] = &corr1;
+	porch->setLinkedRoom(North, corr1);
 
-	Room dinn = Room("Dinning Room", "Description");
-	dinn.linkedRooms["e"] = &corr1;
-	corr1.linkedRooms["w"] = &dinn;
+	corr1->setLinkedRoom(North, hall);
+	corr1->setLinkedRoom(East, kitpass);
+	corr1->setLinkedRoom(South, porch);
+	corr1->setLinkedRoom(West, dinn);
 
-	Room hall = Room("Hall", "Description");
-	hall.linkedRooms["s"] = &corr1;
-	corr1.linkedRooms["n"] = &hall;
+	dinn->setLinkedRoom(East, corr1);
+	
+	hall->setLinkedRoom(North, corr2);
+	hall->setLinkedRoom(South, corr1);
+	hall->setLinkedRoom(West, study);
 
-	Room study = Room("Study", "Description");
-	study.linkedRooms["e"] = &hall;
-	hall.linkedRooms["w"] = &study;
+	study->setLinkedRoom(East, hall);
+	
+	corr2->setLinkedRoom(North, pantry1);
+	corr2->setLinkedRoom(East, pantry2);
+	corr2->setLinkedRoom(South, hall);
+	corr2->setLinkedRoom(West, draw);
+	
+	draw->setLinkedRoom(East, corr2);
+	
+	pantry1->setLinkedRoom(South, corr2);
+	
+	pantry2->setLinkedRoom(West, corr2);
 
-	Room corr2 = Room("Corridor 2", "Description");
-	corr2.linkedRooms["s"] = &hall;
+	kitpass->setLinkedRoom(North, couyar);
+	kitpass->setLinkedRoom(East, kitchen);
+	kitpass->setLinkedRoom(West, corr1);
 
-	Room draw = Room("Drawing Room", "Description");
-	draw.linkedRooms["e"] = &corr2;
-	corr2.linkedRooms["w"] = &draw;
-
-	Room pantry1 = Room("Pantry 1", "Description");
-	pantry1.linkedRooms["s"] = &corr2;
-	corr2.linkedRooms["n"] = &pantry1;
-
-	Room pantry2 = Room("Pantry 2", "Description");
-	pantry2.linkedRooms["w"] = &corr2;
-	corr2.linkedRooms["e"] = &pantry2;
-
-	Room kitpass = Room("Kitchen Passage", "Description");
-	kitpass.linkedRooms["w"] = &corr1;
-	corr1.linkedRooms["e"] = &kitpass;
-
-	Room couyar = Room("Courtyard", "Description");
-	couyar.linkedRooms["s"] = &kitpass;
-	kitpass.linkedRooms["n"] = &couyar;
-
-	Room kitchen = Room("Kitchen", "Description");
-	kitchen.linkedRooms["w"] = &kitpass;
-	kitpass.linkedRooms["e"] = &kitchen;
-
+	couyar->setLinkedRoom( South, kitpass);
+	
+	kitchen->setLinkedRoom( West, kitpass);
+	
 	_roomList.push_back(porch);
 	_roomList.push_back(corr1);
 	_roomList.push_back(dinn);
@@ -59,5 +62,9 @@ Layout::Layout()
 	_roomList.push_back(kitpass);
 	_roomList.push_back(couyar);
 	_roomList.push_back(kitchen);
+}
 
+Room* Layout::getFirstRoom()
+{
+	return _roomList[0];
 }
