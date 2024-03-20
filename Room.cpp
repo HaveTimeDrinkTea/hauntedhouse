@@ -3,41 +3,13 @@
 
 using namespace std;
 
-Room::Room(const string name, const string desc)
+Room::Room(const string name, const string desc) : MainObject(name,desc)
 {
-	_name = name;
-	_desc = desc;
-
 	for (int i = 0; i < 4; i++)
 	{
 		_linkedRooms[i] = nullptr;
+		_smallPassage[i] = nullptr;
 	}
-}
-
-string Room::getName()
-{
-	return _name;
-}
-void Room::setName(string newName)
-{
-	if (newName.empty())
-	{
-		throw invalid_argument("Name must not be empty");
-	}
-	_name = newName;
-}
-
-string Room::getDesc()
-{
-	return _desc;
-}
-void Room::setDesc(string newDesc)
-{
-	if (newDesc.empty())
-	{
-		throw invalid_argument("Description must not be empty");
-	}
-	_desc = newDesc;
 }
 
 void Room::setLinkedRoom(int idx, Room* r)
@@ -48,6 +20,16 @@ void Room::setLinkedRoom(int idx, Room* r)
 Room* Room::getLinkedRoom(int idx)
 {
 	return _linkedRooms[idx];
+}
+
+void Room::setSmallPassage(int idx, Room* r)
+{
+	_smallPassage[idx] = r;
+}
+
+Room* Room::getSmallPassage(int idx)
+{
+	return _smallPassage[idx];
 }
 
 void Room::Displayrooms()
