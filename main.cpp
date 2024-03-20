@@ -4,14 +4,26 @@
 #include "Layout.h"
 #include "GameState.h"
 #include "CommonDefinitions.h"
+#include "Character.h"
 
 using namespace std;
 
 GUIState guiState;
 string guiStrings[] = { "Main", "Move", "Explore" };
 
+int main2()
+{
+    return 0;
+    Character c = Character("hola", "hola2");
+
+    cout << c.getName() << endl;
+    cout << c.getDesc() << endl;
+
+}
+
 int main()
 {
+    
 	Layout house = Layout();
 	GameState gameState = GameState();
 	gameState.setCurrentRoom(house.getFirstRoom());
