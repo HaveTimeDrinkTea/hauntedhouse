@@ -56,7 +56,7 @@ void Room::Displayrooms()
 	{
 		if (_linkedRooms[i] != nullptr)
 		{
-			cout << "[" << i << "]" << " " << _directionNames[i] << " - " << _linkedRooms[i]->getName() << "`\n";
+			cout << "[" << i+1 << "]" << " Move " << _directionNames[i] << " - " << _linkedRooms[i]->getName() << "`\n";
 		}
 	}
 }

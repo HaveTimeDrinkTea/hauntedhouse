@@ -24,11 +24,16 @@ public:
 
     void Displayrooms();
 
+    //TO DO: add set and get functions for items and add code to cpp file
+
 private:
     string _name;
     string _desc;
     Room* _linkedRooms[4];
 
     string _directionNames[4] = { "North", "West", "South", "East" };
+
+    //TO DO: add a container for the room items
+    // vector<Items> _roomItems;
 };
 

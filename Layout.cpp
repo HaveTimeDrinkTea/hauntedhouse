@@ -4,7 +4,7 @@
 Layout::Layout() 
 {
 	Room* porch = new Room("Porch", "Description");
-	Room* corr1 = new Room("Corridor1", "Description");
+	Room* corr1 = new Room("Corridor 1", "Description");
 	Room* dinn = new Room("Dinning Room", "Description");
 	Room* hall = new Room("Hall", "Description");
 	Room* study = new  Room("Study", "Description");
@@ -49,6 +49,10 @@ Layout::Layout()
 	couyar->setLinkedRoom( South, kitpass);
 	
 	kitchen->setLinkedRoom( West, kitpass);
+
+	//TO DO: add items to the rooms
+	//TO DO: store the references to the items
+
 	
 	_roomList.push_back(porch);
 	_roomList.push_back(corr1);
