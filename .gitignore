@@ -37,3 +37,9 @@ x64/Debug/AdventureGame.ilk
 x64/Debug/AdventureGame.log
 AdventureGame.vcxproj
 AdventureGame.vcxproj.filters
+*.vcxproj
+*.vcxproj
+AdventureGame.vcxproj
+AdventureGame.vcxproj.filters
+*.log
+/x64
