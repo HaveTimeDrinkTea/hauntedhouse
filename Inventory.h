@@ -8,7 +8,7 @@
 
 #include <iostream>
 #include <vector>
-#include "Inventory.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -29,16 +29,16 @@ public:
    void getInventory();
 
    //  Find an item in inventory and return position if available
-   bool findInventory(Items *itemPtr);
+   bool findInventory(Item *itemPtr);
 
    //  add item to inventory
-   void addItem(Items *itemPtr);
+   void addItem(Item *itemPtr);
 
    //  remove item from inventory
-   void removeItem(Items *itemPtr);
+   void removeItem(Item *itemPtr);
 
 private:
-   std::vector<Items *> _container = {};
+   std::vector<Item *> _container = {};
 
    int _capacity = 6;
 
