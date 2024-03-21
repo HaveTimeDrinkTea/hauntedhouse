@@ -7,7 +7,7 @@ This is a text-based adventure game for the console written in C++  as part of W
 The text-based adventure game is very loosely based on the the most haunted house in the United Kingdom, the notorious Borley Rectory. It is a first person game where the player's little brother is lost and presumably detained by the infamous "Ghost of the Headless Man". The player is to move around in the various rooms in the Borley Rectory to do a series of tasks and challenges before being able to uncover the location of the player's little brother by first pacifying the "Ghost of the Headless Man".
 
 This is a joint project by 
-* Oscar  [github.com/omm](https://github.com/omml)
+* Oscar  [github.com/omml](https://github.com/omml)
 * Pei  [github.com/HaveTimeDrinkTea](https://github.com/HaveTimeDrinkTea)
 
 
