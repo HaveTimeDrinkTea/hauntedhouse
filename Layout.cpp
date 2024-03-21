@@ -1,8 +1,36 @@
 #include "Layout.h"
 #include "CommonDefinitions.h"
+#include "Item.h"
+#include "ActionPick.h"
+#include "ActionStore.h"
+#include "ActionWear.h"
+#include "ActionMove.h"
+#include "ActionClimb.h"
+#include "ItemCandleStick.h"
+#include "ItemPickedWore.h"
+#include "ItemMoveClimb.h"
+
 
 Layout::Layout() 
 {
+	//Define Actions
+	/*
+	Action* aHit;// = new Action("Hit", "Hits with an item");
+	Action* aCook;// = new Action("Cook", "Cooks an item");
+	Action* aLight;// = new Action("Lights", "Lights an item");
+	Action* aOpen;// = new Action("Open", "Opens an item");
+	Action* aClimb;// = new Action("Climb", "Climbs an item");
+	*/
+	
+	//Fight?
+	//Paint what?
+	//Dig?
+	//Pour what on what
+	//string ActionNames[] = { "Pick", "Hit", "Cook", "Move", "Fight", "Light", "Paint", "LookAt", "Dig", "Climb", "Pour", "Open" };
+
+
+
+	//Define Rooms
 	Room* porch = new Room("Porch", "Description");
 	Room* corr1 = new Room("Corridor 1", "Description");
 	Room* dinn = new Room("Dinning Room", "Description");
@@ -87,7 +115,39 @@ Layout::Layout()
 	//for rat
 	kitchen->setSmallPassage(West, kitpass);
 
-	//TO DO: add items to the rooms
+	//Add items to the corridor 1
+	Item* corr1Candle = new ItemCandleStick("On the West wall in top of the small table");
+	corr1->setItem(corr1Candle);
+
+	Item* corr1Stand = new Item("Coat Stand", "A coat stand", "On the East wall");
+	corr1Stand->setAction(new ActionPick());
+	corr1->setItem(corr1Stand);
+
+	Item* corr1Umb = new ItemPicked("Umbrella", "An old umbrella", "On the East wall next to the coat stand");
+	corr1->setItem(corr1Umb);
+
+	Item* corr1Coat = new ItemPickedWore("Coat", "An old coat", "On the East wall hanging on the to the coat stand");
+	corr1->setItem(corr1Coat);
+	corr1Coat->setParent(corr1Stand);
+
+	Item* corr1Hat = new ItemPickedWore("Hat", "An old hat", "On the East wall hanging on the to the coat stand");
+	corr1->setItem(corr1Coat);
+	corr1Coat->setParent(corr1Hat);
+
+	Item* dinPortrait = new Item("Portrait", "A portrait of the house owner", "On the East wall on top of the fireplace");
+	dinn->setItem(dinPortrait);
+
+	Item* dinTable = new Item("Dinning Table", "An old dinning table", "On the center of the room");
+	dinn->setItem(dinTable);
+
+	//Add items to the dinning room
+	ItemMoveClimb* dinChair = new ItemMoveClimb("Chair", "A comfortable chair", "In front of the table");
+	dinChair->setDestination(dinPortrait);
+	dinChair->setDestination(dinTable);
+	dinChair->move(1);
+	dinn->setItem(dinChair);
+
+	
 	//TO DO: store the references to the items
 
 	_roomList.push_back(porch);

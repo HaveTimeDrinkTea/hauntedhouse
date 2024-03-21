@@ -1,5 +1,6 @@
 #include "Room.h"
 #include <iostream>
+#include "CommonDefinitions.h"
 
 using namespace std;
 
@@ -32,13 +33,37 @@ Room* Room::getSmallPassage(int idx)
 	return _smallPassage[idx];
 }
 
-void Room::Displayrooms()
+int Room::getNumItems()
+{
+	return (int)_items.size();
+}
+
+void Room::displayRooms()
 {
 	for (int i = 0; i < 4; i++)
 	{
 		if (_linkedRooms[i] != nullptr)
 		{
-			cout << "[" << i+1 << "]" << " Move " << _directionNames[i] << " - " << _linkedRooms[i]->getName() << "`\n";
+			cout << "[" << i+1 << "]" << " Move " << DirectionNames[i] << " - " << _linkedRooms[i]->getName() << "`\n";
 		}
+	}
+}
+
+void Room::setItem(Item* i)
+{
+	_items.push_back(i);
+}
+
+Item* Room::getItem(int idx)
+{
+	return _items[idx];
+}
+
+void Room::displayItems()
+{
+	for (int i = 0; i < _items.size(); i++)
+	{
+		//cout << "[" << i + 1 << "]" << " " << _items[i]->getName() << " - " << _items[i]->getPosDesc() << "`\n";
+		cout << "[" << i + 1 << "]" << " " << _items[i]->getDisplayString() << "`\n";
 	}
 }
