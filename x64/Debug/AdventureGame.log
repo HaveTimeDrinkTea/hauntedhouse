@@ -1,6 +1,5 @@
-﻿  GameState.cpp
-  Layout.cpp
-  Room.cpp
+﻿  Layout.cpp
   main.cpp
+  Room.cpp
   Generando código...
   AdventureGame.vcxproj -> C:\Users\HP Desarrollo\Documents\GameDevelopmentBootCamp\AdventureGame\AdventureGame\x64\Debug\AdventureGame.exe
