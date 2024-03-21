@@ -16,6 +16,7 @@ This is a joint project by
 * We plotted the main story line and took note of the MVP for this game.
 * Through the story plotting, we identified the C++ classes, objects, subroutines and game play loop and logic controls.
   
+<img width="1013" alt="hauntedhouse" src="https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/8efcb884-c9dd-4422-b5a7-ad582f8f7d59">
 
 
 
