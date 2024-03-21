@@ -39,7 +39,7 @@ bool Inventory::isEmpty()
 }
 
 //  Find an item in inventory
-bool Inventory::findInventory(Items *itemPtr)
+bool Inventory::findInventory(Item *itemPtr)
 {
    // checks if item is already in container
    bool hasItem = false;
@@ -77,7 +77,7 @@ void Inventory::getInventory()
 }
 
 //  add item to inventory
-void Inventory::addItem(Items *itemPtr)
+void Inventory::addItem(Item *itemPtr)
 {
    if (itemPtr == nullptr)
    {
@@ -108,7 +108,7 @@ void Inventory::addItem(Items *itemPtr)
 }
 
 //  remove item from inventory
-void Inventory::removeItem(Items *itemPtr)
+void Inventory::removeItem(Item *itemPtr)
 {
    // checks if item is already in container
 
