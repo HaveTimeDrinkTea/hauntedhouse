@@ -43,3 +43,8 @@ AdventureGame.vcxproj
 AdventureGame.vcxproj.filters
 *.log
 /x64
+*.vcxproj
+*.vcxproj
+*.filters
+*.ilk
+/x64
