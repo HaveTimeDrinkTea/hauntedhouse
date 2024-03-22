@@ -1,16 +1,16 @@
-#include "ItemPickedWore.h"
+#include "ItemPickWear.h"
 #include "ActionWear.h"
 #include "ActionDrop.h"
 #include "ActionPick.h"
 
-ItemPickedWore::ItemPickedWore(string name, string desc, string dp) : ItemPicked(name, desc, dp)
+ItemPickWear::ItemPickWear(string name, string desc, string dp) : ItemPick(name, desc, dp)
 {
 
 }
 
-void ItemPickedWore::picked()
+void ItemPickWear::picked()
 {
-	ItemPicked::picked();
+	ItemPick::picked();
 
 	setAction(new ActionWear());
 
@@ -20,7 +20,7 @@ void ItemPickedWore::picked()
 	}
 }
 
-void ItemPickedWore::wore()
+void ItemPickWear::wore()
 {
 	removeActions();
 
@@ -29,7 +29,7 @@ void ItemPickedWore::wore()
 	_state = Wore;
 }
 
-void ItemPickedWore::hang()
+void ItemPickWear::hanged()
 {
 	removeActions();
 

@@ -8,122 +8,120 @@
 #include "Inventory.h"
 
 // Constructor
-Inventory::Inventory() {}
+Inventory::Inventory(string n, int c, bool p)
+{
+    _name = n;
+    _capacity = c;
+    _pick = p;
+}
 
 //  check if inventory is full
 bool Inventory::isFull()
 {
-   bool full = true;
+    bool full = true;
 
-   // check the number of elements in vector against the capacity
+    // check the number of elements in vector against the capacity
 
-   if (_container.size() < _capacity)
-   {
-      full = false;
-   }
+    if (_container.size() < _capacity)
+    {
+        full = false;
+    }
 
-   return full;
+    return full;
 }
 
 //  check if inventory is empty
 bool Inventory::isEmpty()
 {
-   bool empty = true;
-   int i = 0;
+    bool empty = true;
+    int i = 0;
 
-   if (_container.size() > 0)
-   {
-      empty = false;
-   }
-   return empty;
+    if (_container.size() > 0)
+    {
+        empty = false;
+    }
+    return empty;
 }
 
 //  Find an item in inventory
-bool Inventory::findInventory(Item *itemPtr)
+bool Inventory::findInventory(Item* itemPtr)
 {
-   // checks if item is already in container
-   bool hasItem = false;
+    // checks if item is already in container
+    bool hasItem = false;
 
-   auto it = std::find(_container.begin(), _container.end(), itemPtr);
+    auto it = std::find(_container.begin(), _container.end(), itemPtr);
 
-   if (it != _container.end())
-   {
-      _itemPosn = std::distance(_container.begin(), it);
-      return true;
-   }
-   else
-   {
-      return false;
-   }
+    if (it != _container.end())
+    {
+        _itemPosn = (int)distance(_container.begin(), it);
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 //  Display inventory content
-void Inventory::getInventory()
+void Inventory::displayInventory()
 {
-   if (Inventory::isEmpty())
-   {
-      std::cout << "Inventory is empty"
-                << "/n";
-      return;
-   }
-   for (int i = 0; i < _capacity; i++)
-   {
-      if (_container[i] != nullptr)
-      {
-         std::cout << "These are the items you have:\n"
-                   << _container[i]->getName() << "\n";
-      }
-   }
+    cout << _name << endl << endl;
+    for (int i = 0; i < _container.size(); i++)
+    {
+        cout << i + 1 << _container[i]->getName() << endl;
+    }
 }
 
 //  add item to inventory
-void Inventory::addItem(Item *itemPtr)
+bool Inventory::addItem(Item* itemPtr)
 {
-   if (itemPtr == nullptr)
-   {
-      return;
-   }
-   //    check if inventory is full
-   else if ((Inventory::isFull()))
-   {
-      std::cout << "Container is full"
-                << "\n";
-   }
-   //    inventory not full
-   else
-   {
-      // checks if item is already in container
+    bool retVal = true;
+    if (itemPtr == nullptr)
+    {
+        retVal = false;
+    }
+    //    check if inventory is full
+    else if ((Inventory::isFull()))
+    {
+        if (_pick)
+        {
+            cout << "Can not carry more, both hands are carrying something" << endl;
+        }
+        else
+        {
+            cout << "Can not store more, the inventory is full" << endl;
+        }
+        retVal = false;
+    }
+    //    inventory not full
+    else
+    {
+        _container.push_back(itemPtr);
+    }
 
-      bool hasItem = Inventory::findInventory(itemPtr);
+    return retVal;
+}
 
-      if (hasItem)
-      {
-         std::cout << "Item already in inventory. There is no need to add.";
-      }
-      else
-      { // push back
-         _container.push_back(itemPtr);
-      }
-   }
+Item* Inventory::getItem(int idx)
+{
+    return _container[idx];
 }
 
 //  remove item from inventory
-void Inventory::removeItem(Item *itemPtr)
+void Inventory::removeItem(Item* itemPtr)
 {
-   // checks if item is already in container
+    // checks if item is already in container
 
-   bool hasItem = Inventory::findInventory(itemPtr);
+    bool hasItem = Inventory::findInventory(itemPtr);
 
-   // if findInventory returns true, the valueof _itemPosn will also be updated.
-   if (hasItem)
-   {
-      auto indexToRemove =
-          _container.erase(_container.begin() + _itemPosn);
-      std::cout << "Success! Item has been removed"
-                << "\n";
-   }
-   else
-   { // push back
-      std::cout << "Sorry! No such item so nothing to remove.";
-   }
+    // if findInventory returns true, the valueof _itemPosn will also be updated.
+    if (hasItem)
+    {
+        auto indexToRemove = _container.erase(_container.begin() + _itemPosn);
+    }
+}
+
+int Inventory::getNumItems()
+{
+    return (int)_container.size();
 }

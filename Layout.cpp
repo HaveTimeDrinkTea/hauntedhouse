@@ -6,8 +6,8 @@
 #include "ActionWear.h"
 #include "ActionMove.h"
 #include "ActionClimb.h"
-#include "ItemCandleStick.h"
-#include "ItemPickedWore.h"
+#include "ItemPickStoreLight.h"
+#include "ItemPickWear.h"
 #include "ItemMoveClimb.h"
 
 
@@ -116,23 +116,23 @@ Layout::Layout()
 	kitchen->setSmallPassage(West, kitpass);
 
 	//Add items to the corridor 1
-	Item* corr1Candle = new ItemCandleStick("On the West wall in top of the small table");
+	Item* corr1Candle = new ItemPickStoreLight("Candlestick", "A candlestick with candles", "On the West wall in top of the small table");
 	corr1->setItem(corr1Candle);
 
 	Item* corr1Stand = new Item("Coat Stand", "A coat stand", "On the East wall");
 	corr1Stand->setAction(new ActionPick());
 	corr1->setItem(corr1Stand);
 
-	Item* corr1Umb = new ItemPicked("Umbrella", "An old umbrella", "On the East wall next to the coat stand");
+	Item* corr1Umb = new ItemPick("Umbrella", "An old umbrella", "On the East wall next to the coat stand");
 	corr1->setItem(corr1Umb);
 
-	Item* corr1Coat = new ItemPickedWore("Coat", "An old coat", "On the East wall hanging on the to the coat stand");
+	Item* corr1Coat = new ItemPickWear("Coat", "An old coat", "On the East wall hanging on the to the coat stand");
 	corr1->setItem(corr1Coat);
 	corr1Coat->setParent(corr1Stand);
 
-	Item* corr1Hat = new ItemPickedWore("Hat", "An old hat", "On the East wall hanging on the to the coat stand");
+	Item* corr1Hat = new ItemPickWear("Hat", "An old hat", "On the East wall hanging on the to the coat stand");
 	corr1->setItem(corr1Coat);
-	corr1Coat->setParent(corr1Hat);
+	corr1Hat->setParent(corr1Stand);
 
 	Item* dinPortrait = new Item("Portrait", "A portrait of the house owner", "On the East wall on top of the fireplace");
 	dinn->setItem(dinPortrait);

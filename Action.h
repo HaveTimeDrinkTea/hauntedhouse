@@ -11,6 +11,7 @@ class Action : public MainObject
 public:
 	Action(const string name, const string desc);
 	void setReceiver(Item* r);
+	virtual ~Action() {}
 
 private:
 	vector<Item*> _posibleReceivers = {};

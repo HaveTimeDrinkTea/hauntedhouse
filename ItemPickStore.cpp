@@ -1,21 +1,21 @@
-#include "ItemPickedStored.h"
+#include "ItemPickStore.h"
 #include "ActionPick.h"
 #include "ActionStore.h"
 #include "ActionDrop.h"
 
-ItemPickedStored::ItemPickedStored(string name, string desc, string dp) : ItemPicked(name, desc, dp)
+ItemPickStore::ItemPickStore(string name, string desc, string dp) : ItemPick(name, desc, dp)
 {
 	setAction(new ActionStore());
 }
 
-void ItemPickedStored::picked()
+void ItemPickStore::picked()
 {
-	ItemPicked::picked();
+	ItemPick::picked();
 
 	setAction(new ActionStore());
 }
 
-void ItemPickedStored::stored()
+void ItemPickStore::stored()
 {
 	removeActions();
 	setAction(new ActionPick());

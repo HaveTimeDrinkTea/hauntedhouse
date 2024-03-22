@@ -13,11 +13,13 @@ class Item : public MainObject
 {
 public:
 	Item(const string name, const string desc, const string posDesc);
+	virtual ~Item() {}
 
 	void setPosDesc(string s);
 	string getPosDesc();
 
 	void setAction(Action* a);
+	Action* getAction(int idx);
 	void displayActions();
 	int getNumActions();
 	string getDisplayString();
@@ -26,12 +28,20 @@ public:
 	Item* getHoldingItem(int idx);
 	int getNumHoldingItems();
 	void removeHoldingItem(Item* it);
+	void displayHoldingItems();
 
 	void setParent(Item* p);
 	Item* getParent();
 
 	void setState(ItemState s);
 	ItemState getState();
+
+	virtual void picked();
+	virtual void stored();
+	virtual void wore();
+	virtual void lighted();
+	virtual void hanged();
+	virtual void dropped();
 
 protected:
 	void removeActions();

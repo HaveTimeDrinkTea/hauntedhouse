@@ -4,6 +4,13 @@
 //
 //  Created by Pei WANG on 21/03/2024.
 //
+
+//
+//  Inventory.cpp
+//  Borley Rectory Haunted Mansion Text-Based Console Game
+//
+//  Created by Pei WANG on 21/03/2024.
+//
 #pragma once
 
 #include <iostream>
@@ -16,31 +23,36 @@ class Inventory
 {
 
 public:
-   //  constructors
-   Inventory();
+	//  constructors
+	Inventory(string n, int c, bool p);
 
-   //  check if inventory is full
-   bool isFull();
+	//  check if inventory is full
+	bool isFull();
 
-   //  check if inventory is empty
-   bool isEmpty();
+	//  check if inventory is empty
+	bool isEmpty();
 
-   //  display inventory content
-   void getInventory();
+	//  display inventory content
+	void displayInventory();
 
-   //  Find an item in inventory and return position if available
-   bool findInventory(Item *itemPtr);
+	//  Find an item in inventory and return position if available
+	bool findInventory(Item* itemPtr);
 
-   //  add item to inventory
-   void addItem(Item *itemPtr);
+	//  add item to inventory
+	bool addItem(Item* itemPtr);
+	Item* getItem(int idx);
+	int getNumItems();
 
-   //  remove item from inventory
-   void removeItem(Item *itemPtr);
+	//  remove item from inventory
+	void removeItem(Item* itemPtr);
 
 private:
-   std::vector<Item *> _container = {};
+	string _name;
 
-   int _capacity = 6;
+	vector<Item*> _container = {};
 
-   int _itemPosn = 0;
+	int _capacity;
+
+	int _itemPosn = 0;
+	bool _pick;
 };

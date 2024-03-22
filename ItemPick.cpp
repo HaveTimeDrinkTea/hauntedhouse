@@ -1,13 +1,13 @@
-#include "ItemPicked.h"
+#include "ItemPick.h"
 #include "ActionPick.h"
 #include "ActionDrop.h"
 
-ItemPicked::ItemPicked(string name, string desc, string dp) : Item(name, desc, dp)
+ItemPick::ItemPick(string name, string desc, string dp) : Item(name, desc, dp)
 {
 	setAction(new ActionPick());
 }
 
-void ItemPicked::picked()
+void ItemPick::picked()
 {
 	removeActions();
 
@@ -17,7 +17,7 @@ void ItemPicked::picked()
 }
 
 
-void ItemPicked::dropped()
+void ItemPick::dropped()
 {
 	removeActions();
 	setAction(new ActionPick());

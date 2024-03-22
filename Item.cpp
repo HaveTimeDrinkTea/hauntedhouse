@@ -35,6 +35,11 @@ void Item::setAction(Action* a)
 	_actions.push_back(a);
 }
 
+Action* Item::getAction(int idx)
+{
+	return _actions[idx];
+}
+
 int Item::getNumActions()
 {
 	return (int)_actions.size();
@@ -89,12 +94,36 @@ void Item::removeHoldingItem(Item* it)
 	}
 }
 
+void Item::displayHoldingItems()
+{
+	if (_holding.size() > 0)
+	{
+		cout << "It has:" << endl;
+	}
+	for (int i = 0; i < _holding.size(); i++)
+	{
+		cout << "-" << _holding[i]->getName() << endl;
+	}
+	if (_holding.size() > 0)
+	{
+		cout << endl << endl;
+	}
+}
+
 void Item::setParent(Item* p)
 {
 	_parent = p;
+	p->setHoldingItem(this);
 }
 
 Item* Item::getParent()
 {
 	return _parent;
 }
+
+void Item::picked(){}
+void Item::stored() {}
+void Item::wore(){}
+void Item::lighted(){}
+void Item::hanged(){}
+void Item::dropped(){}
