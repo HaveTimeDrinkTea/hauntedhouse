@@ -12,11 +12,12 @@ This is a joint project by
 
 
 ### Methodology: Pseudo Code
-* We started with the layout of the sub-section of the layout of the Borley Rectory.
-* We plotted the main story line and took note of the MVP for this game.
+* We started with the layout of the Borley Rectory.
+* We plotted the main story line and took note of the MVPs for this game.
 * Through the story plotting, we identified the C++ classes, objects, subroutines and game play loop and logic controls.
   
-<img width="1013" alt="hauntedhouse" src="https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/8efcb884-c9dd-4422-b5a7-ad582f8f7d59">
+
+<img width="987" alt="figmaScreenDump" src="https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/6da99aa8-f732-4615-8b3b-3191eb634744">
 
 
 
@@ -68,7 +69,19 @@ SO THAT I can be entertain and learn more about text-based adventure game develo
 
 ## Usage 
 
-### Video Demos
+### Screen Dumps
+
+![01navigatingCorridor](https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/c5eeddde-9bc4-4484-a70b-b1db978ddd2d)
+
+![02optiontopickupcandlestick](https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/5388910a-87af-493e-b3f9-f0881d1cdf89)
+
+![03itempicked](https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/ae640fbe-2d93-4b39-9619-bcd2dea83c3c)
+
+![04viewinventory](https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/cf376be7-538a-4b23-b424-ffc3cc48d94e)
+
+![05viewonhandinventory](https://github.com/HaveTimeDrinkTea/hauntedhouse/assets/119045159/9b70fd2a-71d3-4cb4-95d8-a570b023461e)
+
+
 
 #### Demo: 
 * tbc
