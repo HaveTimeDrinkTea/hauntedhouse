@@ -131,7 +131,7 @@ Layout::Layout()
 	corr1Coat->setParent(corr1Stand);
 
 	Item* corr1Hat = new ItemPickWear("Hat", "An old hat", "On the East wall hanging on the to the coat stand");
-	corr1->setItem(corr1Coat);
+	corr1->setItem(corr1Hat);
 	corr1Hat->setParent(corr1Stand);
 
 	Item* dinPortrait = new Item("Portrait", "A portrait of the house owner", "On the East wall on top of the fireplace");

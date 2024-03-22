@@ -11,6 +11,8 @@ void ItemPick::picked()
 {
 	removeActions();
 
+	_posDesc = "";
+
 	setAction(new ActionDrop());
 
 	setState(Picked);

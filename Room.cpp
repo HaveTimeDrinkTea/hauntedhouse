@@ -54,6 +54,11 @@ void Room::setItem(Item* i)
 	_items.push_back(i);
 }
 
+void Room::removeItem(Item* i)
+{
+	_items.erase( remove(_items.begin(), _items.end(), i), _items.end() );
+}
+
 Item* Room::getItem(int idx)
 {
 	return _items[idx];

@@ -26,19 +26,38 @@ int main2()
 
 }
 
-void HandleAction(Action* a, Item* item, Inventory* hand, Inventory* bag)
+bool HandleAction(Room* r, Action* a, Item* item, Inventory* hand, Inventory* bag, string* m)
 {
+    bool retVal = false;
+
     if (ActionPick* aPick = dynamic_cast<ActionPick*>(a))
     {
-        if (Item* iObject = dynamic_cast<ItemPickWear*>(item))
+        if (item->getNumHoldingItems() == 0)
         {
-
+            if (hand->addItem(item, m))
+            {
+                item->picked();
+                r->removeItem(item);
+                *m = "Item was picked and now you are holding it";
+                retVal = true;
+            }
+            else
+            {
+                retVal = false;
+            }
+        }
+        else
+        {
+            *m = "Item can not be picked while it is hokding items";
+            retVal = false;
         }
     }
     else if (ActionStore* aStore = dynamic_cast<ActionStore*>(a))
     {
         
     }
+
+    return retVal;
 }
 
 int main()
@@ -56,8 +75,9 @@ int main()
     int selectInventoryOption = -1;
     int inventoryOption = -1;
     int numItems = 0;
+    string message = "";
 
-    Room* current;
+    Room* currentRoom;
     Room* next;
     Item* currentItem;
 
@@ -67,12 +87,12 @@ int main()
     {
         system("cls");
 
-        current = gameState.getCurrentRoom();
+        currentRoom = gameState.getCurrentRoom();
 
         cout << "Looking around "
-            + current->getName()
+            + currentRoom->getName()
             + " you see "
-            + current->getDesc()
+            + currentRoom->getDesc()
             + "\n\n";
         
 
@@ -105,7 +125,7 @@ int main()
             cout << "Move Options:\n";
             cout << "[0] Go Back\n";
 
-            current->displayRooms();
+            currentRoom->displayRooms();
             
             cout << "\nSelect an option > ";
             cin >> moveOption;
@@ -116,7 +136,7 @@ int main()
             }
             else if (moveOption > 0 && moveOption < 4)
             {
-                next = current->getLinkedRoom(moveOption - 1);
+                next = currentRoom->getLinkedRoom(moveOption - 1);
                 if (next != nullptr)
                 {
                     //set the current room to be the room in that direction
@@ -126,10 +146,13 @@ int main()
             }
             break;
         case ExploreGUI:
+
+            cout << message << endl << endl;
+
             cout << "Explore Options:\n";
             cout << "[0] Go Back\n";
 
-            current->displayItems();
+            currentRoom->displayItems();
 
             cout << "\nSelect an option > ";
             cin >> exploreOption;
@@ -138,20 +161,23 @@ int main()
             {
                 guiState = MainGUI;
             }
-            else if (exploreOption > 0 && exploreOption < current->getNumItems())
+            else if (exploreOption > 0 && exploreOption <= currentRoom->getNumItems())
             {
-                guiState = ItemGUI;
+                message = "";
+
+                guiState = ItemGUI;                
             }
             break;
         case ItemGUI:
-            currentItem = current->getItem(exploreOption - 1);
+            currentItem = currentRoom->getItem(exploreOption - 1);
+
+            cout << message << endl << endl;
 
             cout << currentItem->getDisplayString() << endl << endl;
             currentItem->displayHoldingItems();
 
             cout << "Item Options:\n";
             cout << "[0] Go Back\n";
-
             
             currentItem->displayActions();
 
@@ -162,11 +188,16 @@ int main()
             {
                 guiState = ExploreGUI;
             }
-            else if (itemOption > 0 && itemOption < currentItem->getNumActions())
+            else if (itemOption > 0 && itemOption <= currentItem->getNumActions())
             {
+                message = "";
+
                 Action* a = currentItem->getAction(itemOption - 1);
 
-                //HandleAction(a);
+                if (HandleAction(currentRoom, a, currentItem, &hands, &bag, &message))
+                {
+                    guiState = ExploreGUI;
+                }
             }
             
             break;
@@ -211,7 +242,7 @@ int main()
             {
                 guiState = SelectInventoryGUI;
             }
-            else if (inventoryOption > 0 && inventoryOption < numItems)
+            else if (inventoryOption > 0 && inventoryOption <= numItems)
             {
                 guiState = InventoryItemGUI;
             }
@@ -220,16 +251,10 @@ int main()
             if (selectInventoryOption == 1)
             {
                 currentItem = hands.getItem(inventoryOption - 1);
-                cout << "Carrying in hands, options:\n";
-                cout << "[0] Go Back\n";
-                hands.displayInventory();
             }
             else
             {
                 currentItem = bag.getItem(inventoryOption - 1);
-                cout << "Carrying in bag, options:\n";
-                cout << "[0] Go Back\n";
-                bag.displayInventory();
             }
 
             cout << currentItem->getDisplayString() << endl << endl;
@@ -247,7 +272,7 @@ int main()
             {
                 guiState = ExploreGUI;
             }
-            else if (itemOption > 0 && itemOption < currentItem->getNumActions())
+            else if (itemOption > 0 && itemOption <= currentItem->getNumActions())
             {
 
             }

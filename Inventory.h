@@ -39,7 +39,7 @@ public:
 	bool findInventory(Item* itemPtr);
 
 	//  add item to inventory
-	bool addItem(Item* itemPtr);
+	bool addItem(Item* itemPtr, string* m);
 	Item* getItem(int idx);
 	int getNumItems();
 

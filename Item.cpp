@@ -15,6 +15,7 @@ void Item::removeActions()
 	{
 		delete a;
 	}
+	_actions.clear();
 }
 
 string Item::getPosDesc()

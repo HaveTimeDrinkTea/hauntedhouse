@@ -65,15 +65,14 @@ bool Inventory::findInventory(Item* itemPtr)
 //  Display inventory content
 void Inventory::displayInventory()
 {
-    cout << _name << endl << endl;
     for (int i = 0; i < _container.size(); i++)
     {
-        cout << i + 1 << _container[i]->getName() << endl;
+        cout << "[" << i + 1 << "] " << _container[i]->getName() << endl;
     }
 }
 
 //  add item to inventory
-bool Inventory::addItem(Item* itemPtr)
+bool Inventory::addItem(Item* itemPtr, string* m)
 {
     bool retVal = true;
     if (itemPtr == nullptr)
@@ -85,11 +84,11 @@ bool Inventory::addItem(Item* itemPtr)
     {
         if (_pick)
         {
-            cout << "Can not carry more, both hands are carrying something" << endl;
+            *m = "Can not carry more, both hands are carrying something";
         }
         else
         {
-            cout << "Can not store more, the inventory is full" << endl;
+            *m = "Can not store more, the inventory is full";
         }
         retVal = false;
     }

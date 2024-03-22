@@ -19,6 +19,7 @@ public:
     void setItem(Item* i);
     Item* getItem(int idx);
     int getNumItems();
+    void removeItem(Item* i);
 
     void displayRooms();
     void displayItems();
