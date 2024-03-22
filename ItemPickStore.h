@@ -8,5 +8,6 @@ public:
 
 	void picked() override;
 	void stored() override;
+	void dropped() override;
 };
 

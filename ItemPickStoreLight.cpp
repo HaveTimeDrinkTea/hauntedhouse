@@ -6,8 +6,7 @@
 
 ItemPickStoreLight::ItemPickStoreLight(const string name, const string desc, const string dp) : ItemPickStore(name, desc, dp)
 {
-	//setAction(new ActionPick());
-	//setAction(new ActionStore());
+
 }
 
 
@@ -24,6 +23,6 @@ void ItemPickStoreLight::picked()
 	ItemPickStore::picked();
 
 	setAction(new ActionLight());
-
 }
+
 

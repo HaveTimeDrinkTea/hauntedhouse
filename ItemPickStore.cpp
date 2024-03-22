@@ -17,10 +17,19 @@ void ItemPickStore::picked()
 
 void ItemPickStore::stored()
 {
+	_posDesc = "";
+
 	removeActions();
 	setAction(new ActionPick());
 	setAction(new ActionDrop());
 
 	setState(Stored);
+}
+
+void ItemPickStore::dropped()
+{
+	ItemPick::dropped();
+
+	setAction(new ActionStore());
 }
 

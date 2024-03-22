@@ -8,6 +8,5 @@ public:
 
 	void lighted() override;
 	void picked() override;
-
 };
 

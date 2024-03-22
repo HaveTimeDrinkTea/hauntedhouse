@@ -8,6 +8,7 @@
 #include "Inventory.h"
 #include "ActionPick.h"
 #include "ActionStore.h"
+#include "ActionDrop.h"
 #include "ItemPickWear.h"
 
 using namespace std;
@@ -38,6 +39,7 @@ bool HandleAction(Room* r, Action* a, Item* item, Inventory* hand, Inventory* ba
             {
                 item->picked();
                 r->removeItem(item);
+                bag->removeItem(item);
                 *m = "Item was picked and now you are holding it";
                 retVal = true;
             }
@@ -54,7 +56,29 @@ bool HandleAction(Room* r, Action* a, Item* item, Inventory* hand, Inventory* ba
     }
     else if (ActionStore* aStore = dynamic_cast<ActionStore*>(a))
     {
+        if (bag->addItem(item, m))
+        {
+            item->stored();
+            r->removeItem(item);
+            hand->removeItem(item);
+            *m = "Item was stored in your bag";
+            retVal = true;
+        }
+        else
+        {
+            retVal = false;
+        }
+    }
+    else if (ActionDrop* aDrop = dynamic_cast<ActionDrop*>(a))
+    {
+        item->dropped();
+        r->setItem(item);
+        item->setPosDesc("Laying on the floor");
         
+        hand->removeItem(item);
+        bag->removeItem(item);
+        *m = "Item has been dropped to the floor";
+        retVal = true;
     }
 
     return retVal;
@@ -108,6 +132,8 @@ int main()
             cout << "\nSelect an option > ";
             cin >> mainOption;
 
+            message = "";
+
             switch (mainOption)
             {
             case 1:
@@ -134,8 +160,10 @@ int main()
             {
                 guiState = MainGUI;
             }
-            else if (moveOption > 0 && moveOption < 4)
+            else if (moveOption > 0 && moveOption < 5)
             {
+                message = "";
+
                 next = currentRoom->getLinkedRoom(moveOption - 1);
                 if (next != nullptr)
                 {
@@ -202,6 +230,10 @@ int main()
             
             break;
         case SelectInventoryGUI:
+
+            message = "";
+            //cout << message << endl << endl;
+
             cout << "Inventory Options:\n";
             cout << "[0] Go Back\n";
             cout << "[1] Carrying on Hands\n";
@@ -216,10 +248,15 @@ int main()
             }
             else if (selectInventoryOption > 0 && selectInventoryOption < 3)
             {
+                message = "";
+
                 guiState = InventoryGUI;
             }
             break;
         case InventoryGUI:
+
+            cout << message << endl << endl;
+
             if (selectInventoryOption == 1)
             {
                 cout << "Carrying in hands, options:\n";
@@ -244,10 +281,15 @@ int main()
             }
             else if (inventoryOption > 0 && inventoryOption <= numItems)
             {
+                message = "";
+
                 guiState = InventoryItemGUI;
             }
             break;
         case InventoryItemGUI:
+
+            cout << message << endl << endl;
+
             if (selectInventoryOption == 1)
             {
                 currentItem = hands.getItem(inventoryOption - 1);
@@ -274,6 +316,14 @@ int main()
             }
             else if (itemOption > 0 && itemOption <= currentItem->getNumActions())
             {
+                message = "";
+
+                Action* a = currentItem->getAction(itemOption - 1);
+
+                if (HandleAction(currentRoom, a, currentItem, &hands, &bag, &message))
+                {
+                    guiState = InventoryGUI;
+                }
 
             }
 
